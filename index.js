@@ -169,14 +169,50 @@ MAÇ UZAR ise skorTabelasi(periyotSkoru,takimSkoru,4)
 ] */
 // NOTE: Bununla ilgili bir test yoktur. Eğer logladığınız sonuçlar yukarıdakine benziyor ise tmamlandı sayabilirsiniz.
 
-function skorTabelasi(/*Kodunuzu buraya yazınız*/) {
-  /*Kodunuzu buraya yazınız*/
-}
+function skorTabelasi(periyotSkorr,takimSkorr,ceyrekSayisi) {
 
+    const skorTablo = [];
+    let i = 1;
+    let ev = 0;
+    let konuk = 0;
+
+    while((i)<=ceyrekSayisi)
+    {
+      skorTablo.push( i+". Periyot: Ev Sahibi "+ periyotSkorr(takimSkorr).EvSahibi +"- Konuk Takım "+ periyotSkorr(takimSkorr).KonukTakim);
+      ev += periyotSkorr(takimSkorr).EvSahibi;
+      konuk += periyotSkorr(takimSkorr).KonukTakim;
+      i++;
+    }
+    skorTablo.push(`Maç Sonucu: Ev Sahibi ${ev} - Konuk Takım ${konuk}`);
+    let uzatmaSayisi = 0;
+    function macUzatmaKontrol() 
+    {
+      if (ev === konuk) 
+        {
+          uzatmaSayisi++; 
+          ev = ev + periyotSkorr(takimSkorr).EvSahibi;
+          konuk = konuk + periyotSkorr(takimSkorr).KonukTakim;
+          skorTablo.push(`${uzatmaSayisi}. Uzatma: Ev Sahibi ${periyotSkorr(takimSkorr).EvSahibi} - Konuk Takım ${periyotSkorr(takimSkorr).KonukTakim}`);
+          console.log(
+            `${uzatmaSayisi}. Uzatma: Ev Sahibi ${periyotSkorr(takimSkorr).EvSahibi} - Konuk Takım ${periyotSkorr(takimSkorr).KonukTakim}`
+          );
+        }
+      if (ev === konuk) 
+      {
+          macUzatmaKontrol();
+      }
+    }
+    macUzatmaKontrol();
+    console.log(`Final Skoru : Ev Sahibi ${ev} - Konuk Takım ${konuk}`);
+    return skorTablo;
+}
+console.log("SKOR TABELASI :  ",skorTabelasi(periyotSkoru,takimSkoru,4));
 
 
 
 /* Aşağıdaki satırları lütfen değiştirmeyiniz*/
+
+
 function sa(){
   console.log('Kodlar çalışıyor');
   return 'as';
