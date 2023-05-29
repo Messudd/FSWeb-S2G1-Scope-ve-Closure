@@ -64,10 +64,12 @@ Aşağıdaki takimSkoru() fonksiyonununda aşağıdakileri yapınız:
 Not: Bu fonskiyon, aşağıdaki diğer görevler için de bir callback fonksiyonu olarak da kullanılacak
 */
 
-function takimSkoru(/*Kodunuzu buraya yazınız*/){
-    /*Kodunuzu buraya yazınız*/
+function takimSkoru(){
+    const max= 26, min= 10 ;
+    const skor_ceyrek = Math.floor(Math.random()*(max-min)+min);
+    return skor_ceyrek;
 }
-
+console.log("Bir ceyrekte takımın ürettiği skor : ",takimSkoru());
 
 
 
@@ -86,14 +88,25 @@ Aşağıdaki macSonucu() fonksiyonununda aşağıdakileri yapınız:
 }
 */ 
 
-function macSonucu(/*Kodunuzu buraya yazınız*/){
-  /*Kodunuzu buraya yazınız*/
+function macSonucu(takimSkoruCallback,BasketCeyrekSayisi){
+  let skorEvSahibi = 0;
+  let skorKonukTakim = 0;
+  let baslangic = 1;
+
+  while(baslangic<=BasketCeyrekSayisi){
+
+     skorEvSahibi = skorEvSahibi+Number(takimSkoruCallback());
+     skorKonukTakim = skorKonukTakim+Number(takimSkoruCallback());
+     baslangic++;
+  }
+  const macSonuc = {
+
+    "EvSahibi":skorEvSahibi,
+    "KonukTakim":skorKonukTakim,
+  }
+  return macSonuc;
 }
-
-
-
-
-
+console.log("Maçın - Skoru : ",macSonucu(takimSkoru,4));
 
 /* Zorlayıcı Görev 4: periyotSkoru()
 Aşağıdaki periyotSkoru() fonksiyonununda aşağıdakileri yapınız:
@@ -109,10 +122,20 @@ Aşağıdaki periyotSkoru() fonksiyonununda aşağıdakileri yapınız:
   */
 
 
-function periyotSkoru(/*Kodunuzu buraya yazınız*/) {
-  /*Kodunuzu buraya yazınız*/
+function periyotSkoru(skorCallback,) {
+  
+  const evSahibi = skorCallback();
+  const konukTakim = skorCallback();
+
+  const takimNesnesi = {
+
+    "EvSahibi": evSahibi,
+    "KonukTakim":konukTakim,
+  }
+ return takimNesnesi;
 
 }
+console.log("Takım Skoru -- Sonucları : ",periyotSkoru(takimSkoru));
 
 
 /* Zorlayıcı Görev 5: skorTabelasi() 
